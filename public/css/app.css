@@ -1,0 +1,94 @@
+/* Artfully masterminded by ZURB  */
+ 
+ 
+/* -----------------------------------------
+   THIS IS ALL DECLARED IN THE PLUGIN
+----------------------------------------- */
+
+
+.pushdown { 
+	padding-top: 150px; 
+}
+
+.flickrbombWrapper { 
+	width: 350px; 
+	height: 200px;
+	overflow: hidden;
+	display: block;
+	background: #f79421;
+	position: relative;
+}
+
+.flickrbombWrapper:hover .setupIcon { 
+	display: block;	
+}
+
+.setupIcon { 
+	display: none;
+	background: url(../images/setupIcon.png); 
+	width: 34px; 
+	height: 34px; 
+	position: absolute; 
+	bottom: 8px; 
+	right: 8px; 
+	opacity: .7;
+}
+
+.setupIcon:hover { 
+	opacity: 1;
+}
+
+/* If the image is wider */
+img.flickrbomb { 
+	width: 100%;
+}
+
+/* If the image is wider */
+/*
+img.flickrbomb { 
+	height: 100%;
+}
+*/
+
+
+
+#flickrbombFlyout {
+	display: none;
+	background: rgba(0,0,0,.6);
+	width: 345px; 
+	height: 230px; 
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 3px solid rgba(255,255,255,.95);
+	-moz-box-shadow: 1px 1px 9px rgba(0,0,0,.7);
+	-webkit-box-shadow: 1px 1px 9px rgba(0,0,0,.7);
+	box-shadow: 1px 1px 9px rgba(0,0,0,.7);
+	padding: 20px 5px 5px 20px; 
+	
+	/* Just for demo */ 
+	position: relative; 
+	top: -170px; 
+	left: 130px; 
+}
+
+#flickrbombFlyout a { 
+	display: block;
+	overflow: hidden; 
+	width: 100px; 
+	height: 60px; 
+	float: left; 
+	margin: 0 15px 15px 0;
+	position: relative; 
+}
+
+#flickrbombFlyout a img { 
+	width: 100%;
+}
+
+#flickrbombFlyout a:hover { 
+	-moz-box-shadow: 0 0 8px rgba(0,0,0,.7);
+	-webkit-box-shadow: 0 0 8px rgba(0,0,0,.7);
+	box-shadow: 0 0 8px rgba(0,0,0,.7);
+	top: -1px; 
+}
