@@ -11,8 +11,8 @@
 }
 
 .flickrbombWrapper { 
-	width: 350px; 
-	height: 200px;
+/*  width: 350px; 
+  height: 200px;*/
 	overflow: hidden;
 	display: block;
 	background: #f79421;
@@ -40,7 +40,10 @@
 
 /* If the image is wider */
 img.flickrbomb { 
-	width: 100%;
+/*  width: 100%;*/
+	position: absolute;
+	left: 0;
+	top: 0;
 }
 
 /* If the image is wider */
@@ -52,7 +55,7 @@ img.flickrbomb {
 
 
 
-#flickrbombFlyout {
+.flickrbombFlyout {
 	display: none;
 	background: rgba(0,0,0,.6);
 	width: 345px; 
@@ -72,7 +75,7 @@ img.flickrbomb {
 	left: 130px; 
 }
 
-#flickrbombFlyout a { 
+.flickrbombFlyout a { 
 	display: block;
 	overflow: hidden; 
 	width: 100px; 
@@ -82,11 +85,11 @@ img.flickrbomb {
 	position: relative; 
 }
 
-#flickrbombFlyout a img { 
+.flickrbombFlyout a img { 
 	width: 100%;
 }
 
-#flickrbombFlyout a:hover { 
+.flickrbombFlyout a:hover { 
 	-moz-box-shadow: 0 0 8px rgba(0,0,0,.7);
 	-webkit-box-shadow: 0 0 8px rgba(0,0,0,.7);
 	box-shadow: 0 0 8px rgba(0,0,0,.7);

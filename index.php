@@ -14,31 +14,27 @@
 				
 				 -->
 				
-				
-				
-				<div class="flickrbombWrapper">
-					<img class="flickrbomb" src="public/images/cats/cat.jpg" />
-					<a href="#" class="setupIcon"></a>
-				</div>
-				
-				
-				<div id="flickrbombFlyout">
-					<a href="#"><img src="public/images/cats/cat1.jpg" /></a>
-					<a href="#"><img src="public/images/cats/cat2.jpg" /></a>
-					<a href="#"><img src="public/images/cats/cat3.jpg" /></a>
-					<a href="#"><img src="public/images/cats/cat4.jpg" /></a>
-					<a href="#"><img src="public/images/cats/cat5.jpg" /></a>
-					<a href="#"><img src="public/images/cats/cat6.jpg" /></a>
-					<a href="#"><img src="public/images/cats/cat7.jpg" /></a>
-					<a href="#"><img src="public/images/cats/cat8.jpg" /></a>
-					<a href="#"><img src="public/images/cats/cat9.jpg" /></a>
-				</div>
-				
+				<img src="flickr://minecraft" data-width="400" data-height="600" />
 				
 				
 			</div>
 		</div><!-- .column-row -->
 	</div><!-- container -->
+
+<script type="text/template" id="imageTemplate">
+	<div class="flickrbombWrapper">
+		<img class="flickrbomb" src="" />
+		<a href="#" class="setupIcon"></a>
+	</div>
+	<div class="flickrbombFlyout">
+	</div>
+</script>
+
+<script type="text/template" id="flickrImageTemplate">
+	<img src="<%= thumb_url() %>" />
+</script>
+
+	
 <?php include("includes/_footer.php");  ?>
 </body>
 </html>
