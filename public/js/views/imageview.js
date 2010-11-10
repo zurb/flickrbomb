@@ -14,19 +14,17 @@ define(['models/image', 'views/flickrimageview'], function (Image, FlickrImageVi
       this.image = new Image({keywords: keywords, id: options.img.attr('id')});
       this.image.flickrImages.bind('add', this.addImage);
       this.image.bind('change:src', this.updateSrc);
-      this.image.bind('change', this.updateDimentions);
     },
 
     events: {
       "click .setupIcon": "clickSetup",
-      "click .flickrbombFlyout a": "selectImage",
-      "load img.flickrbomb": "setDimentions"
+      "click .flickrbombFlyout a": "selectImage"
     },
 
     render: function() {
       $(this.el).html(this.template());
       this.image.fetch();
-      this.resizeAndCrop();
+      this.resize();
       return this;
     },
 
@@ -41,13 +39,14 @@ define(['models/image', 'views/flickrimageview'], function (Image, FlickrImageVi
         width: $(event.target).width(),
         height: $(event.target).height()
       });
+      this.updateDimentions(this.image);
       $(event.target).unbind('load');
     },
 
-    updateDimentions: function (model) {
+    updateDimentions: function () {
       var image = this.$('img.flickrbomb'),
-          flickrWidth = model.get('width'),
-          flickrHeight = model.get('height'),
+          flickrWidth = this.image.get('width'),
+          flickrHeight = this.image.get('height'),
           flickrAspectRatio = flickrWidth / flickrHeight,
           clientWidth = this.width(),
           clientHeight = this.height(),
@@ -94,7 +93,7 @@ define(['models/image', 'views/flickrimageview'], function (Image, FlickrImageVi
       this.toggleFlyout();
     },
 
-    resizeAndCrop: function () {
+    resize: function () {
       this.$('div.flickrbombWrapper').css({
           width: this.width() + 'px', 
           height: this.height() + 'px'

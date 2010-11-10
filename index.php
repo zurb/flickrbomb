@@ -14,7 +14,9 @@
 				
 				 -->
 				
-				<img src="flickr://minecraft" data-width="400" data-height="600" />
+				<img src="flickr://taylor" data-width="400" data-height="200" />
+				
+				<img src="flickr://dogs and cats" data-width="200" data-height="400" />
 				
 				
 			</div>
