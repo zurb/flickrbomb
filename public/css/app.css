@@ -75,7 +75,7 @@ img.flickrbomb {
 	left: 130px; 
 }
 
-.flickrbombFlyout a { 
+.flickrbombFlyout a.photo { 
 	display: block;
 	overflow: hidden; 
 	width: 100px; 
@@ -85,7 +85,7 @@ img.flickrbomb {
 	position: relative; 
 }
 
-.flickrbombFlyout a img { 
+.flickrbombFlyout a.photo img { 
 	width: 100%;
 }
 

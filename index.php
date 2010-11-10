@@ -29,6 +29,7 @@
 		<a href="#" class="setupIcon"></a>
 	</div>
 	<div class="flickrbombFlyout">
+		<a href="#" class="next">reload</a>
 	</div>
 </script>
 

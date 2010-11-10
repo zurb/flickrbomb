@@ -18,7 +18,8 @@ define(['models/image', 'views/flickrimageview'], function (Image, FlickrImageVi
 
     events: {
       "click .setupIcon": "clickSetup",
-      "click .flickrbombFlyout a": "selectImage"
+      "click .flickrbombFlyout a.photo": "selectImage",
+      "click .flickrbombFlyout a.next": "nextFlickrPhotos"
     },
 
     render: function() {
@@ -74,8 +75,8 @@ define(['models/image', 'views/flickrimageview'], function (Image, FlickrImageVi
     },
 
     addImage: function (image) {
-      var flickrImageView = new FlickrImageView({model: image, image: this.image});
-      this.$('.flickrbombFlyout').append(flickrImageView.render().el);
+      this.flickrImageView = new FlickrImageView({model: image, image: this.image});
+      this.$('.flickrbombFlyout').append(this.flickrImageView.render().el);
     },
 
     clickSetup: function (event) {
@@ -91,6 +92,13 @@ define(['models/image', 'views/flickrimageview'], function (Image, FlickrImageVi
       event.preventDefault();
 
       this.toggleFlyout();
+    },
+    
+    nextFlickrPhotos: function (event) {
+      event.preventDefault();
+      
+      this.$('.flickrbombFlyout').find('a.photo').remove();
+      this.image.flickrImages.nextPage();
     },
 
     resize: function () {
