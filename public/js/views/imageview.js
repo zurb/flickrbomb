@@ -114,11 +114,11 @@ define(['models/image', 'views/flickrimageview'], function (Image, FlickrImageVi
     },
 
     width: function () {
-      return parseInt(this.options.img.attr('data-width'));
+      return parseInt(this.options.img.width());
     },
 
     height: function () {
-      return parseInt(this.options.img.attr('data-height'));
+      return parseInt(this.options.img.width());
     }
 
   });

@@ -1,4 +1,7 @@
 <?php include("includes/_doc_head.php"); ?>
+<style>
+/*	#testthing {width: 400px; height: 400px;}*/
+</style>
 <body id="<?= $page_name ?>-page" class="<?=$browser?>">
 	<div class="container">
 		<div class="column-row">
@@ -14,7 +17,7 @@
 				
 				 -->
 				
-				<img src="flickr://taylor swift" data-width="800" data-height="800" />
+				<img id="testthing" src="flickr://taylor swift" width="600px" height="400px" />
 				
 				<!-- <img src="flickr://dogs and cats" data-width="200" data-height="400" /> -->
 				
