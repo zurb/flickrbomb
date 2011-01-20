@@ -14,7 +14,7 @@
 				
 				 -->
 				
-				<img src="flickr://smallboobs" data-width="800" data-height="800" />
+				<img src="flickr://taylor swift" data-width="800" data-height="800" />
 				
 				<!-- <img src="flickr://dogs and cats" data-width="200" data-height="400" /> -->
 				

@@ -1,7 +1,8 @@
 define(['collections/flickrimages'], function (FlickrImages) {
+  var localStorage = (supports_local_storage()) ? new Store("flickrBombImages") : null;
   return Backbone.Model.extend({
 
-    localStorage: new Store("flickrBombImages"),
+    localStorage: localStorage,
 
     initialize: function () {
       _.bindAll(this, 'loadFirstImage');
