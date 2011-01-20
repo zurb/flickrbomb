@@ -7,8 +7,9 @@ define(['models/flickrimage'], function (FlickrImage) {
     
     page: 1,
 
-    fetch: function (keywords) {
+    fetch: function (keywords, success) {
       var self = this;
+      success = success || $.noop;
       this.keywords = keywords || this.keywords;
       $.ajax({
   			url: 'http://api.flickr.com/services/rest/',
@@ -24,6 +25,7 @@ define(['models/flickrimage'], function (FlickrImage) {
   			jsonp: 'jsoncallback',
   			success: function (response) {
   			  self.add(response.photos.photo);
+  			  success();
   			}
   		});
     },

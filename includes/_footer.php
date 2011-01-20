@@ -1,4 +1,4 @@
-<script data-main="app" src="public/js/require-jquery-1.4.3.js"></script>
+<script data-main="app" src="public/js/requireplugins-jquery-1.4.4.js"></script>
 
 
 

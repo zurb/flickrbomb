@@ -1,4 +1,4 @@
-require(['underscore', 'backbone', 'backbone-localstorage', 'views/imageview'], function (u, b, bl, ImageView) {
+require(['order!underscore', 'order!backbone', 'order!backbone-localstorage', 'order!views/imageview'], function (u, b, bl, ImageView) {
   require.ready(function () {
     $("img[src^='flickr://']").each(function () {
       var img = $(this);

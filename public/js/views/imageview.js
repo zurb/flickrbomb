@@ -31,11 +31,16 @@ define(['models/image', 'views/flickrimageview'], function (Image, FlickrImageVi
 
     updateSrc: function (model, src) {
       var self = this;
-      this.$('img.flickrbomb').bind('load', self.setDimentions)
+      this.$('img.flickrbomb')
+          .css({top: 'auto', left: 'auto', width: 'auto', height: 'auto'})
+          .attr('src', '')
+          .bind('load', self.setDimentions)
           .attr('src', src);
     },
 
     setDimentions: function (event) {
+      // console.log($(event.target).width());
+      // console.log($(event.target).height());
       this.image.set({
         width: $(event.target).width(),
         height: $(event.target).height()
