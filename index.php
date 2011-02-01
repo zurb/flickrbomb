@@ -17,7 +17,7 @@
 				
 				 -->
 				
-				<img id="testthing" src="flickr://taylor swift" width="600px" height="400px" />
+				<img id="testthing" src="flickr://taylor swift" width="600px" height="600px" />
 				
 				<!-- <img src="flickr://dogs and cats" data-width="200" data-height="400" /> -->
 				

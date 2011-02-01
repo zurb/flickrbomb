@@ -10,6 +10,8 @@ define(['models/image', 'views/flickrimageview'], function (Image, FlickrImageVi
     initialize: function (options) {
       _.bindAll(this, 'addImage', 'updateSrc', 'setDimentions', 'updateDimentions');
       var keywords = options.img.attr('src').replace('flickr://', '');
+      
+      this.$el = $(this.el);
 
       this.image = new Image({keywords: keywords, id: options.img.attr('id')});
       this.image.flickrImages.bind('add', this.addImage);
@@ -39,11 +41,9 @@ define(['models/image', 'views/flickrimageview'], function (Image, FlickrImageVi
     },
 
     setDimentions: function (event) {
-      // console.log($(event.target).width());
-      // console.log($(event.target).height());
       this.image.set({
-        width: $(event.target).width(),
-        height: $(event.target).height()
+        width: this.$('img').width(),
+        height: this.$('img').height()
       });
       this.updateDimentions(this.image);
       $(event.target).unbind('load');
@@ -54,8 +54,8 @@ define(['models/image', 'views/flickrimageview'], function (Image, FlickrImageVi
           flickrWidth = this.image.get('width'),
           flickrHeight = this.image.get('height'),
           flickrAspectRatio = flickrWidth / flickrHeight,
-          clientWidth = this.width(),
-          clientHeight = this.height(),
+          clientWidth = this.$('div.flickrbombWrapper').width(),
+          clientHeight = this.$('div.flickrbombWrapper').height(),
           clientAspectRatio = clientWidth / clientHeight;
 
       if (flickrAspectRatio < clientAspectRatio) {
