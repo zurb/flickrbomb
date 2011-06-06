@@ -25,21 +25,6 @@
 			</div>
 		</div><!-- .column-row -->
 	</div><!-- container -->
-
-<script type="text/template" id="imageTemplate">
-	<div class="flickrbombWrapper">
-		<img class="flickrbomb" src="" />
-		<a href="#" class="setupIcon"></a>
-	</div>
-	<div class="flickrbombFlyout">
-		<a href="#" class="next">reload</a>
-	</div>
-</script>
-
-<script type="text/template" id="flickrImageTemplate">
-	<img src="<%= thumb_url() %>" />
-</script>
-
 	
 <?php include("includes/_footer.php");  ?>
 </body>

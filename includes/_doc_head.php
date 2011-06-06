@@ -40,8 +40,8 @@
 	<title>Title This Page :)</title>
   
 	<!--============== IMPORT EXTERNAL SHEETS ================== -->
-	<link rel="stylesheet" href="public/css/global.css">
-	<link rel="stylesheet" href="public/css/app.css">
+	<link rel="stylesheet" href="css/global.css">
+	<link rel="stylesheet" href="css/app.css">
 
 	<!-- Uncomment to make IE8 render like IE7
 		<meta http-equiv="X-UA-Compatible" content="IE=7" />
