@@ -1,4 +1,5 @@
 (function($){
+function demoLoad (){
 	var currentValue = false,
 	el = $('#demo-content span');
 	el.focus(function(){
@@ -15,13 +16,13 @@
 	});
 	function updateIMG(argu) {
 		if (argu.text() !== currentValue) {
-			var keywords = $('#keywords').text(),
-			width = $('#width').text(),
-			height = $('#height').text();
-			$('#demo-splash').html('<img src="flickr://' + keywords + '" width="' + width + '" height="' + height + '"><span>Loading New Demo Content</span>');
+			var keywords = $('#keywords').text();
+			$('#demo-splash').html('<img src="flickr://' + keywords + '" width="940px" height="250px" style="display:none"><span>Loading New Demo Content</span>');
 			startFlickrBomb();
 		} else {
 			return false;
 		}
 	}
+}
+demoLoad();
 })(jQuery);
