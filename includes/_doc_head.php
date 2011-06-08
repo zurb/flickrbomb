@@ -37,11 +37,12 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8" />
-	<title>Title This Page :)</title>
+	<title>ZURBflickrbomb</title>
   
 	<!--============== IMPORT EXTERNAL SHEETS ================== -->
 	<link rel="stylesheet" href="css/global.css">
 	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/flickrbomb.css">
 
 	<!-- Uncomment to make IE8 render like IE7
 		<meta http-equiv="X-UA-Compatible" content="IE=7" />

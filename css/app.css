@@ -1,98 +1,85 @@
-/* Artfully masterminded by ZURB  */
- 
- 
-/* -----------------------------------------
-   THIS IS ALL DECLARED IN THE PLUGIN
------------------------------------------ */
-
-
-.pushdown { 
-	padding-top: 150px; 
+body {
+	background: #061C2A url(../images/bg.png) top center repeat;
 }
-
-.flickrbombWrapper { 
-/*  width: 350px; 
-  height: 200px;*/
+.demo-row li {
+	float: left;
+	border: 1px solid #ddd;
+	padding: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	width: 100px;
+	height: 100px;
+	margin-right: 5px;
+}
+h1 img {
+	position: absolute;
+	margin-left: -70px;
+	margin-top: -5px;
+}
+h1 {
+	padding-left: 70px;
+	padding-top: 25px;
+	padding-bottom: 10px;
+}
+#demo-content {
+	font-size: 20px;
+	text-align: center;
+	background: #eee;
+	padding: 15px;
 	overflow: hidden;
-	display: block;
-	background: #f79421;
+	white-space: nowrap;
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+#demo-splash {
+	background: #222;
 	position: relative;
 }
-
-.flickrbombWrapper:hover .setupIcon { 
-	display: block;	
+#demo-splash #uniqueID, #demo-splash .flickrbomb {
+	position: relative;
+	z-index: 0;
 }
-
-.setupIcon { 
-	display: none;
-/*  background: url(../images/setupIcon.png); */
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAApdJREFUeNpiZGBgYALidCD2BmJpBvqBb0B8Foi7gfgxI5CIB+IChoEDD4A4DOSQ9UCswDCwIAUULRzUMs3b25vnxo0b6v///zfo7e2VIEErFyhEtgOxBKWOyM3NFZo0aZIciH3z5s3vGhoaN0nQnsdEjZAQFhZmhjkCBLZu3foRWd7S0pJz9+7divjMoIpDsrKyhNCiiB+ZP3/+fDkXFxd+fGawUMMhAgICzMh8dXV1TlBUGRgYcFpbW/OA+ITMoIpDPnz48BddDDmqiAFUiZqVK1d+/PPnz398atauXfuO5g5RVVVlY2FhYcQlD8pF6enpT2nqEFCOmTVrFtZo+PLly9++vr4XwHRy5+3bt39pmkaqqqpEpaSk2JDF9uzZ89HV1fU+KeZQVKCByodjx46po4eCsbHxzVu3bv2iW4E2YcIEjNq6q6vrBYmOoCyN1NbWipqZmfGgJ8rm5ubX5JjHRG4CLSsrw4jOxMTER+R6jCyHzJw5U5qHhwelNJ03b97r48ePfyfXISQnVlBVv2XLFhVksWfPnv3S09O7SSiLUjWxYiszysvLn1LgCOKiBpQeQI2cz58/64IaPOhlxqlTp74sWbLkI6XlEQshRxw9elQFV+358+fPf7GxsY8YqACYCCVKfFU4IxBQq5mJ1yHBwcFC+OTZ2NgYw8PD+anhEKLqGlBBBYyiLz9+/PgPbI2J4WsU0cwh6A1hZ2dnXuTowtYoonrUgGpR9NISFDLI/GnTpr2jeYhgq8pBbVB4KZSX94jS8oOsIh5UnoCiBRRdPj4+dyZPnvyOWrmGah0sCgG4iP/LMPDgN8ghJwbYEaDEfwVUBpwDYi0glhkAR4DqqHIgvodcRAsDsRgdHfEHiG/DOAABBgDwy+4qw3JyZwAAAABJRU5ErkJggg==);
-	width: 34px; 
-	height: 34px; 
-	position: absolute; 
-	bottom: 8px; 
-	right: 8px; 
-	opacity: .7;
+#demo-content span {
+	background: #444;
+	color: #eee;
+	font-weight: 300;
+	padding: 2px 5px 2px 5px;
+	max-width:250px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin-right: 1px;
+	margin-left: 1px;
 }
-
-.setupIcon:hover { 
-	opacity: 1;
+#demo-content span:focus {
+	background: #555;
+	border-bottom: 2px dashed #fbc520;
 }
-
-/* If the image is wider */
-img.flickrbomb { 
-/*  width: 100%;*/
+#demo-splash {
+	height: 250px;
+/*	overflow: hidden;
+*/}
+#demo-splash span {
 	position: absolute;
-	left: 0;
-	top: 0;
+	top: 5px;
+	left: 35px;
+	font-weight: bold;
+	z-index: -1;
 }
-
-/* If the image is wider */
-/*
-img.flickrbomb { 
-	height: 100%;
+span {
+	outline: none;
 }
-*/
-
-
-
-.flickrbombFlyout {
-	display: none;
-	background: rgba(0,0,0,.6);
-	width: 345px; 
-	height: 230px; 
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	border: 3px solid rgba(255,255,255,.95);
-	-moz-box-shadow: 1px 1px 9px rgba(0,0,0,.7);
-	-webkit-box-shadow: 1px 1px 9px rgba(0,0,0,.7);
-	box-shadow: 1px 1px 9px rgba(0,0,0,.7);
-	padding: 20px 5px 5px 20px; 
-	
-	/* Just for demo */ 
-	position: relative; 
-	top: -170px; 
-	left: 130px; 
+#demo-body h2 {
+	text-align: center;
+	text-shadow: 1px 2px 2px #ddd;
+	padding-top: 45px;
+	padding-bottom: 45px;
 }
-
-.flickrbombFlyout a.photo { 
-	display: block;
-	overflow: hidden; 
-	width: 100px; 
-	height: 60px; 
-	float: left; 
-	margin: 0 15px 15px 0;
-	position: relative; 
-}
-
-.flickrbombFlyout a.photo img { 
-	width: 100%;
-}
-
-.flickrbombFlyout a:hover { 
-	-moz-box-shadow: 0 0 8px rgba(0,0,0,.7);
-	-webkit-box-shadow: 0 0 8px rgba(0,0,0,.7);
-	box-shadow: 0 0 8px rgba(0,0,0,.7);
-	top: -1px; 
+.demo {
+	/* demo images */
 }

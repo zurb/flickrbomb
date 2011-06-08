@@ -1,4 +1,5 @@
 //FlickrBomb by ZURB 2011; http://www.zurb.com/playground
+var startFlickrBomb = function () {
 function supports_local_storage() { try { return 'localStorage' in window && window['localStorage'] !== null; } catch(e){ return false; } }
 
 if (supports_local_storage()) {
@@ -348,3 +349,5 @@ if (supports_local_storage()) {
   });
   
 })(jQuery);
+}
+startFlickrBomb();
