@@ -62,7 +62,7 @@ h1 {
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	position: relative;
-	z-index: -1;
+	z-index: 99;
 }
 #demo-splash {
 	background: #222;
@@ -73,6 +73,7 @@ h1 {
 	z-index: 0;
 }
 #demo-content span {
+	position: relative;
 	background: #7dbbe6;
 	color: #0e3c5d;
 	font-weight: 300;
@@ -83,10 +84,11 @@ h1 {
 	border-radius: 3px;
 	margin-right: 1px;
 	margin-left: 1px;
+	z-index: 100;
 }
 #demo-content span:focus {
+	position: relati;
 	background: #a3c7e0;
-	color: ;
 	border-bottom: 2px dashed #222;
 }
 #demo-splash {
