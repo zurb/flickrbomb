@@ -95,7 +95,7 @@ h1 {
 #demo-splash span {
 	position: absolute;
 	top: 5px;
-	left: 35px;
+	left: 10px;
 	font-weight: bold;
 	z-index: 0;
 }
@@ -152,12 +152,12 @@ h3 {
 	display: block;
 	float: left;
 	height: 115px;
-	padding-left: 15px;
+	padding-left: 21px;
 }
 .old-vs-new li.first {
 	border-right: 1px solid #c9c8c8;
 	height: 100%;
-	padding-right: 15px;
+	padding-right: 21px;
 	padding-left: 0;
 }
 .old-vs-new h5 {
@@ -200,4 +200,15 @@ h3 {
 }
 .highlight pre {
 	-moz-border-radius: 5px; border-radius: 5px; -webkit-border-radius: 5px; margin: 0; display: block; font: 11px Monaco, monospace !important; padding: 15px; background-color: #1C1C1C; overflow: auto; color: #D0D0D0; line-height: 125%;
+}
+.button {
+	background: #2B7F9E;
+	color: #eee !important;
+}
+.button:hover {
+	background: #3CB1DC;
+}
+#johnstewart {
+	float: right;
+	padding-left: 10px;
 }

@@ -1,8 +1,18 @@
-<?php include("includes/_doc_head.php"); ?>
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<title>ZURBflickrbomb</title>
+  
+	<!--============== IMPORT EXTERNAL SHEETS ================== -->
+	<link rel="stylesheet" href="css/global.css">
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/flickrbomb.css">
+
+</head>
 <style>
 /*	#testthing {width: 400px; height: 400px;}*/
 </style>
-<body id="<?= $page_name ?>-page" class="<?=$browser?>">
+<body>
 <div class="container main-content">
 	<div class="row">
 		<div claass="sixteen columns">
@@ -41,7 +51,7 @@
 								<li class="no-caption"><img src="flickr://tennis" width="100px" height="100px"></li>
 							</ul>
 							</div>
-							<div style="clear:both"></div>
+							<div style="clear:both"><br></div>
 							<h3>
 								1. Set up
 							</h3>
@@ -108,7 +118,7 @@
 								<h3>
 									3. How it works
 								</h3>
-								<p>
+								<p><img src="flickr://john stewart" width="175px" height="175px">
 									flickrBomb uses <a href="http://jquery.com" title="jQuery">jQuery</a>, <a href="http://documentcloud.github.com/underscore/" title="Underscore.js">Underscore</a>, <a href="http://documentcloud.github.com/backbone/" title="Backbone.js">Backbone.js</a>, and your browsers <a href="http://documentcloud.github.com/backbone/docs/backbone-localstorage.html" title="Backbone.js Local Storage Adapter">local storage</a> to make the magic happen. The plugin scours your html and finds all the image tags that have a source attribute that starts with <span>flickr://</span> and searches flickr for the terms that follow. If it finds anything, the image tag is replaced with flickrbomb's <span>flickrbombContainer</span> div. It does this for each images pointing to flickr://.
 								</p>
 								<h3>
@@ -135,7 +145,7 @@
 								</h3>
 								<p>
 									You can download your copy right here or on <a href="http://github.com" title="flickrBomb Github">github</a>.
-								</p><a href="#download" class="nice button radius" title="minified version">flickrBomb Minified (20kb)</a> <a href="#download" class="nice button radius" title="flickrBomb uncompressed">flickrBomb Uncompressed (70kb)</a><br>
+								</p><a href="#download" class="nice button radius large" title="minified version">flickrBomb Minified (20kb)</a> <a href="#download" class="nice button radius large" title="flickrBomb uncompressed">flickrBomb Uncompressed (70kb)</a><br>
 								<br>
 							</div>
 						</div>
@@ -144,6 +154,8 @@
 			</div>
 			</div>
 </div>
-<?php include("includes/_footer.php");  ?>
+<script src="//code.jquery.com/jquery-1.6.min.js"></script>
+<script src="js/jquery.flickrbomb.demo.min.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

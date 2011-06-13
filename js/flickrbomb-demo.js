@@ -1,97 +1,5 @@
 //FlickrBomb by ZURB 2011; http://www.zurb.com/playground
 var startFlickrBomb = function () {
-function supports_local_storage() { try { return 'localStorage' in window && window['localStorage'] !== null; } catch(e){ return false; } }
-
-if (supports_local_storage()) {
-  
-  // A simple module to replace `Backbone.sync` with *localStorage*-based
-  // persistence. Models are given GUIDS, and saved into a JSON object. Simple
-  // as that.
-
-  // Generate four random hex digits.
-  function S4() {
-     return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-  };
-
-  // Generate a pseudo-GUID by concatenating random hexadecimal.
-  function guid() {
-     return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-  };
-
-  // Our Store is represented by a single JS object in *localStorage*. Create it
-  // with a meaningful name, like the name you'd give a table.
-  var Store = function(name) {
-    this.name = name;
-    var store = localStorage.getItem(this.name);
-    this.data = (store && JSON.parse(store)) || {};
-  };
-
-  _.extend(Store.prototype, {
-
-    // Save the current state of the **Store** to *localStorage*.
-    save: function() {
-      localStorage.setItem(this.name, JSON.stringify(this.data));
-    },
-
-    // Add a model, giving it a (hopefully)-unique GUID, if it doesn't already
-    // have an id of it's own.
-    create: function(model) {
-      if (!model.id) model.id = model.attributes.id = guid();
-      this.data[model.id] = model;
-      this.save();
-      return model;
-    },
-
-    // Update a model by replacing its copy in `this.data`.
-    update: function(model) {
-      this.data[model.id] = model;
-      this.save();
-      return model;
-    },
-
-    // Retrieve a model from `this.data` by id.
-    find: function(model) {
-      return this.data[model.id];
-    },
-
-    // Return the array of all models currently in storage.
-    findAll: function() {
-      return _.values(this.data);
-    },
-
-    // Delete a model from `this.data`, returning it.
-    destroy: function(model) {
-      delete this.data[model.id];
-      this.save();
-      return model;
-    }
-
-  });
-  // Override `Backbone.sync` to use delegate to the model or collection's
-  // *localStorage* property, which should be an instance of `Store`.
-  Backbone.sync = function(method, model, success, error) {
-
-    var resp;
-    var store = model.localStorage || model.collection.localStorage;
-
-    switch (method) {
-      case "read":    resp = model.id ? store.find(model) : store.findAll(); break;
-      case "create":  resp = store.create(model);                            break;
-      case "update":  resp = store.update(model);                            break;
-      case "delete":  resp = store.destroy(model);                           break;
-    }
-
-    if (resp) {
-      success(resp);
-    } else {
-      // Swallow errors for now
-      // error("Record not found");
-    }
-  };
-} else {
-  Backbone.sync = $.noop;
-}
-//FlickrBomb by ZURB 2011; http://www.zurb.com/playground
 (function ($) {
   var localStorage = (supports_local_storage()) ? new Store("flickrBombImages") : null,
 
@@ -209,24 +117,28 @@ if (supports_local_storage()) {
         }
 
       }),
-      
+
       ImageView = Backbone.View.extend({
 
         tagName: "div",
 
         className: "flickrbombContainer",
 
-        template: _.template('<div class="flickrbombWrapper"><img class="flickrbomb" src="" /><a href="#" title="Setup" class="setupIcon"></a></div><div class="flickrbombFlyout"><div class="content"><a href="#" title="Previous Page" class="prev">&#9664;</a><a href="#" title="Next Page" class="next">&#9654;</a></div></div>'),
+		nodeID: null,
+
+        template: _.template('<div id="<%= this.nodeID %>" class="flickrbombWrapper"><img class="flickrbomb" src="" /><a href="#" title="Setup" class="setupIcon"></a></div><div class="flickrbombFlyout"><div class="content"><a href="#" title="Previous Page" class="prev">&#9664;</a><a href="#" title="Next Page" class="next">&#9654;</a></div></div>'),
 
         initialize: function (options) {
           _.bindAll(this, 'addImage', 'updateSrc', 'setDimentions', 'updateDimentions');
           var keywords = options.img.attr('src').replace('flickr://', '');
 
           this.$el = $(this.el);
-
+		  
           this.image = new Image({keywords: keywords, id: options.img.attr('id')});
           this.image.flickrImages.bind('add', this.addImage);
           this.image.bind('change:src', this.updateSrc);
+
+		  this.nodeID = this.image.id.replace(/ /g,'');
         },
 
         events: {
@@ -298,13 +210,14 @@ if (supports_local_storage()) {
 
         clickSetup: function (event) {
           event.preventDefault();
+
           this.toggleFlyout();
         },
 
-        toggleFlyout: function () {    
-          this.$('.flickrbombFlyout').toggle();
+        toggleFlyout: function () {
+			this.$('.flickrbombFlyout').toggle();
         },
-
+		
         selectImage: function (event) {
           event.preventDefault();
 
@@ -313,7 +226,6 @@ if (supports_local_storage()) {
 
         nextFlickrPhotos: function (event) {
           event.preventDefault();
-
           this.$('.flickrbombFlyout').find('a.photo').remove();
           this.image.flickrImages.nextPage();
         },
@@ -326,7 +238,7 @@ if (supports_local_storage()) {
 
         resize: function () {
           this.$('div.flickrbombWrapper').css({
-              width: this.width() + 'px', 
+              width: this.width() + 'px',
               height: this.height() + 'px'
           });
         },
@@ -340,10 +252,8 @@ if (supports_local_storage()) {
         }
 
       });
-
   $("img[src^='flickr://']").each(function () {
     var img = $(this);
-	$('.flickrbombContainer').css('height', img.height()+'px !important');
     var imageView = new ImageView({img: img});
     img.replaceWith(imageView.render().el);
   });

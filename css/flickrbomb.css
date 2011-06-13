@@ -77,11 +77,8 @@ img.flickrbomb {
 	);
 	padding: 20px 35px 0px 45px; 
 	
-	/* Just for demo */ 
-	position: absolute; 
-	z-index: 99999;
-	bottom: -250px;
-	right: 7px;
+	position: absolute;
+	z-index: 9999;
 }
 /*.flickrbombFlyout:after {
 	content:"";
@@ -142,4 +139,9 @@ img.flickrbomb {
 }
 .flickrbombFlyout a.next {
 	right: 10px;
+}
+.flickrbombGallery {
+	display:none;
+	position: absolute;
+	z-index: 9999;
 }
