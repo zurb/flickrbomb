@@ -133,8 +133,9 @@ h3 {
 	margin-bottom: -7px;
 }
 .bomber {
-	background: url('../images/bomber.jpg') 0 0 no-repeat;
+	background: url('../images/bomber.jpg') 0 75px no-repeat;
 	height: 719px;
+	text-align: center;
 }
 .old-vs-new {
 	position: relative;
