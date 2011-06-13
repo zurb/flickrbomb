@@ -53,7 +53,7 @@ img.flickrbomb {
 
 .flickrbombFlyout {
 	display: none;
-	background: rgba(0,0,0,.6);
+	background: rgba(0,0,0,.9);
 	width: 345px; 
 	height: 230px; 
 	-moz-border-radius: 5px;
@@ -63,6 +63,8 @@ img.flickrbomb {
 	-moz-box-shadow: 1px 1px 9px rgba(0,0,0,.85);
 	-webkit-box-shadow: 1px 1px 9px rgba(0,0,0,.85);
 	box-shadow: 1px 1px 9px rgba(0,0,0,.85);
+	background: -ms-linear-gradient(left, rgba(29,30,33,1) 0%,rgba(0,0,0,.5) 100%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d1e21', endColorstr='#000000',GradientType=.5 ); /* IE6-9 */
 	background-image: -webkit-gradient(
 	    linear,
 	    left bottom,

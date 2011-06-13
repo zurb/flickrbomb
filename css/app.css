@@ -1,3 +1,4 @@
+#container {overflow: hidden !important;}
 body {
 	background: #eaf0f4 url(../images/bg-clouds.jpg) top center repeat-x;
 }
