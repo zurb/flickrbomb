@@ -55,7 +55,7 @@ var startFlickrBomb = function () {
 
         model: FlickrImage,
 
-        key: '16bea98fa32f982f4502fb3df0903404',
+        key: '66b5c17019403c96779e8fe88d5b576d',
 
         page: 1,
 
