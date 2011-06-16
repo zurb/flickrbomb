@@ -1,5 +1,31 @@
-//FlickrBomb by ZURB 2011; http://www.zurb.com/playground
-var startFlickrBomb = function () {
+/*
+ * flickrBomb v1
+ * www.ZURB.com/playground
+ * Copyright 2011, ZURB
+ * Free to use under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+*/
+
+var flickrbombAPIkey = '66b5c17019403c96779e8fe88d5b576d',  //your Flickr API key
+
+/*  flickrbombLicenseTypes values (comma delimited)
+
+	empty means all license types
+	0: All Rights Reserved
+	4: Attribution License http://creativecommons.org/licenses/by/2.0/
+	6: Attribution-NoDerivs License http://creativecommons.org/licenses/by-nd/2.0/
+	3: Attribution-NonCommercial-NoDerivs License http://creativecommons.org/licenses/by-nc-nd/2.0/
+	2: Attribution-NonCommercial License http://creativecommons.org/licenses/by-nc/2.0/
+	1: Attribution-NonCommercial-ShareAlike License http://creativecommons.org/licenses/by-nc-sa/2.0/
+	5: Attribution-ShareAlike License http://creativecommons.org/licenses/by-sa/2.0/
+	7: No known copyright restrictions http://www.flickr.com/commons/usage/
+	8: United States Government Work http://www.usa.gov/copyright.shtml
+	
+	ex. flickrbombLicenseTypes = '5,7,8';
+*/
+	flickrbombLicenseTypes = '';
+
+startFlickrBomb = function () {
 (function ($) {
   var localStorage = (supports_local_storage()) ? new Store("flickrBombImages") : null,
 
@@ -71,7 +97,8 @@ var startFlickrBomb = function () {
       				method: 'flickr.photos.search',
       				tags: this.keywords,
       				per_page: 9,
-      				page: this.page
+      				page: this.page,
+					license: flickrbombLicenseTypes
       			},
       			dataType: 'jsonp',
       			jsonp: 'jsoncallback',
