@@ -80,7 +80,7 @@ var flickrbombAPIkey = '66b5c17019403c96779e8fe88d5b576d',  //your Flickr API ke
 
 	        model: FlickrImage,
 
-	        key: '66b5c17019403c96779e8fe88d5b576d',
+	        key: flickrbombAPIkey,
 
 	        page: 1,
 
