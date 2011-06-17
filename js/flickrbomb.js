@@ -108,16 +108,16 @@ var flickrbombAPIkey = '66b5c17019403c96779e8fe88d5b576d',  //your Flickr API ke
 	      		});
 	        },
 
-	        nextPage: function () {
+	        nextPage: function (callback) {
 	          	this.page += 1;
 	          	this.remove(this.models);
-			  	this.fetch();
+			  	this.fetch(null, callback);
 	        },
 
-			prevPage: function() {
-			  if (this.page > 1) this.page -= 1;
+			prevPage: function(callback) {
+			  if (this.page > 1) {this.page -= 1;}
 			  this.remove(this.models);
-			  this.fetch();
+			  this.fetch(null, callback);
 			}
 
 	      }),
@@ -149,7 +149,9 @@ var flickrbombAPIkey = '66b5c17019403c96779e8fe88d5b576d',  //your Flickr API ke
 	        tagName: "div",
 
 	        className: "flickrbombContainer",
-
+	
+			lock: false,
+			
 	        template: _.template('<div id="<%= this.image.id.replace(" ","") %>" class="flickrbombWrapper"><img class="flickrbomb" src="" /><a href="#" title="Setup" class="setupIcon"></a></div><div class="flickrbombFlyout"><div class="content"><a href="#" title="Previous Page" class="prev">&#9664;</a><a href="#" title="Next Page" class="next">&#9654;</a></div></div>'),
 
 	        initialize: function (options) {
@@ -253,15 +255,25 @@ var flickrbombAPIkey = '66b5c17019403c96779e8fe88d5b576d',  //your Flickr API ke
 
 	        nextFlickrPhotos: function (event) {
 	          event.preventDefault();
-
-	          this.$('.flickrbombFlyout').find('a.photo').remove();
-	          this.image.flickrImages.nextPage();
+			  var self = this;
+			  if(!this.lock) {
+			  	this.lock = true;
+	          	this.$('.flickrbombFlyout').find('a.photo').remove();
+	          	this.image.flickrImages.nextPage(function() {
+				  self.lock = false;
+			    });
+			  }
 	        },
 			prevFlickrPhotos: function (event) {
 	          event.preventDefault();
-
-	          this.$('.flickrbombFlyout').find('a.photo').remove();
-	          this.image.flickrImages.prevPage();
+			  var self = this;
+			  if(!this.lock) {
+			  	this.lock = true;
+	          	this.$('.flickrbombFlyout').find('a.photo').remove();
+	          	this.image.flickrImages.prevPage(function() {
+				  self.lock = false;
+			    });
+			  }
 	        },
 
 	        resize: function () {
