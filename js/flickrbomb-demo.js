@@ -20,271 +20,274 @@ var flickrbombAPIkey = '66b5c17019403c96779e8fe88d5b576d',  //your Flickr API ke
 	5: Attribution-ShareAlike License http://creativecommons.org/licenses/by-sa/2.0/
 	7: No known copyright restrictions http://www.flickr.com/commons/usage/
 	8: United States Government Work http://www.usa.gov/copyright.shtml
-	
+
 	ex. flickrbombLicenseTypes = '5,7,8';
 */
 	flickrbombLicenseTypes = '';
 
 startFlickrBomb = function () {
-(function ($) {
-  var localStorage = (supports_local_storage()) ? new Store("flickrBombImages") : null,
+	(function ($) {
+	  var localStorage = (supports_local_storage()) ? new Store("flickrBombImages") : null,
 
-      FlickrImage = Backbone.Model.extend({
+	      FlickrImage = Backbone.Model.extend({
 
-        fullsize_url: function () {
-          return this.image_url('medium');
-        },
+	        fullsize_url: function () {
+	          return this.image_url('medium');
+	        },
 
-        thumb_url: function () {
-          return this.image_url('square');
-        },
+	        thumb_url: function () {
+	          return this.image_url('square');
+	        },
 
-        image_url: function (size) {
-          var size_code;
-          switch (size) {
-            case 'square': size_code = '_s'; break; // 75x75
-            case 'medium': size_code = '_z'; break; // 640 on the longest side
-            case 'large': size_code = '_b'; break; // 1024 on the longest side
-            default: size_code = '';
-          }
-          return "http://farm" + this.get('farm') + ".static.flickr.com/" + this.get('server') + "/" + this.get('id') + "_" + this.get('secret') + size_code + ".jpg";
-        }
+	        image_url: function (size) {
+	          var size_code;
+	          switch (size) {
+	            case 'square': size_code = '_s'; break; // 75x75
+	            case 'medium': size_code = '_z'; break; // 640 on the longest side
+	            case 'large': size_code = '_b'; break; // 1024 on the longest side
+	            default: size_code = '';
+	          }
+	          return "http://farm" + this.get('farm') + ".static.flickr.com/" + this.get('server') + "/" + this.get('id') + "_" + this.get('secret') + size_code + ".jpg";
+	        }
 
-      }),
-      
-      Image = Backbone.Model.extend({
+	      }),
 
-        localStorage: localStorage,
+	      Image = Backbone.Model.extend({
 
-        initialize: function () {
-          _.bindAll(this, 'loadFirstImage');
-          this.flickrImages = new FlickrImages();
-          this.flickrImages.fetch(this.get('keywords'), this.loadFirstImage);
-          this.set({id: this.get("id") || this.get('keywords')});
-      
-          this.bind('change:src', this.changeSrc);
-        },
+	        localStorage: localStorage,
 
-        changeSrc: function () {
-          this.save();
-        },
-    
-        loadFirstImage: function () {
-          if (this.get('src') === undefined) {
-            this.set({src: this.flickrImages.first().image_url()});
-          }
-        }
+	        initialize: function () {
+	          _.bindAll(this, 'loadFirstImage');
+	          this.flickrImages = new FlickrImages();
+	          this.flickrImages.fetch(this.get('keywords'), this.loadFirstImage);
+	          this.set({id: this.get("id") || this.get('keywords')});
 
-      }),
-      
-      FlickrImages = Backbone.Collection.extend({
+	          this.bind('change:src', this.changeSrc);
+	        },
 
-        model: FlickrImage,
+	        changeSrc: function () {
+	          this.save();
+	        },
 
-        key: '66b5c17019403c96779e8fe88d5b576d',
+	        loadFirstImage: function () {
+	          if (this.get('src') === undefined) {
+	            this.set({src: this.flickrImages.first().image_url()});
+	          }
+	        }
 
-        page: 1,
+	      }),
 
-        fetch: function (keywords, success) {
-          var self = this;
-          success = success || $.noop;
-          this.keywords = keywords || this.keywords;
-          $.ajax({
-      			url: 'http://api.flickr.com/services/rest/',
-      			data: {
-      				api_key: self.key,
-      				format: 'json',
-      				method: 'flickr.photos.search',
-      				tags: this.keywords,
-      				per_page: 9,
-      				page: this.page,
-					license: flickrbombLicenseTypes
-      			},
-      			dataType: 'jsonp',
-      			jsonp: 'jsoncallback',
-      			success: function (response) {
-      			  self.add(response.photos.photo);
-      			  success();
-      			}
-      		});
-        },
+	      FlickrImages = Backbone.Collection.extend({
 
-        nextPage: function () {
-          this.page += 1;
-          this.remove(this.models);
-          this.fetch();
-        },
-		
-		prevPage: function() {
-		  if (this.page > 1) this.page -= 1;
-		  this.remove(this.models);
-		  this.fetch();
-		}
+	        model: FlickrImage,
 
-      }),
-      
-      FlickrImageView = Backbone.View.extend({
+	        key: '66b5c17019403c96779e8fe88d5b576d',
 
-        tagName: 'a',
+	        page: 1,
 
-        template: _.template('<img src="<%= thumb_url() %>" />'),
+	        fetch: function (keywords, success) {
+	          var self = this;
+	          success = success || $.noop;
+	          this.keywords = keywords || this.keywords;
+	          $.ajax({
+	      			url: 'http://api.flickr.com/services/rest/',
+	      			data: {
+	      				api_key: self.key,
+	      				format: 'json',
+	      				method: 'flickr.photos.search',
+	      				tags: this.keywords,
+	      				per_page: 9,
+	      				page: this.page,
+						license: flickrbombLicenseTypes
+	      			},
+	      			dataType: 'jsonp',
+	      			jsonp: 'jsoncallback',
+	      			success: function (response) {
+	      			  self.add(response.photos.photo);
+	      			  success();
+	      			}
+	      		});
+	        },
 
-        className: 'photo',
+	        nextPage: function () {
+	          	this.page += 1;
+	          	this.remove(this.models);
+			  	this.fetch();
+	        },
 
-        events: {"click": "setImageSrc"},
+			prevPage: function() {
+			  if (this.page > 1) this.page -= 1;
+			  this.remove(this.models);
+			  this.fetch();
+			}
 
-        render: function() {
-          $(this.el).html(this.template(this.model));
-          $(this.el).addClass('photo');
-          return this;
-        },
+	      }),
 
-        setImageSrc: function (event) {
-          this.options.image.set({'src': this.model.fullsize_url()});
-        }
+	      FlickrImageView = Backbone.View.extend({
 
-      }),
+	        tagName: 'a',
 
-      ImageView = Backbone.View.extend({
+	        template: _.template('<img src="<%= thumb_url() %>" />'),
 
-        tagName: "div",
+	        className: 'photo',
 
-        className: "flickrbombContainer",
+	        events: {"click": "setImageSrc"},
 
-		nodeID: null,
+	        render: function() {
+	          $(this.el).html(this.template(this.model));
+	          $(this.el).addClass('photo');
+	          return this;
+	        },
 
-        template: _.template('<div id="<%= this.nodeID %>" class="flickrbombWrapper"><img class="flickrbomb" src="" /><a href="#" title="Setup" class="setupIcon"></a></div><div class="flickrbombFlyout"><div class="content"><a href="#" title="Previous Page" class="prev">&#9664;</a><a href="#" title="Next Page" class="next">&#9654;</a></div></div>'),
+	        setImageSrc: function (event) {
+	          this.options.image.set({'src': this.model.fullsize_url()});
+	        }
 
-        initialize: function (options) {
-          _.bindAll(this, 'addImage', 'updateSrc', 'setDimentions', 'updateDimentions');
-          var keywords = options.img.attr('src').replace('flickr://', '');
+	      }),
 
-          this.$el = $(this.el);
-		  
-          this.image = new Image({keywords: keywords, id: options.img.attr('id')});
-          this.image.flickrImages.bind('add', this.addImage);
-          this.image.bind('change:src', this.updateSrc);
+	      ImageView = Backbone.View.extend({
 
-		  this.nodeID = this.image.id.replace(/ /g,'');
-        },
+	        tagName: "div",
 
-        events: {
-          "click .setupIcon": "clickSetup",
-          "click .flickrbombFlyout a.photo": "selectImage",
-          "click .flickrbombFlyout a.next": "nextFlickrPhotos",
-		  "click .flickrbombFlyout a.prev": "prevFlickrPhotos"
-        },
+	        className: "flickrbombContainer",
 
-        render: function() {
-          $(this.el).html(this.template());
-          this.image.fetch();
-          this.resize();
-          return this;
-        },
+	        template: _.template('<div class="flickrbombWrapper"><img class="flickrbomb" src="" /><a href="#" title="Setup" class="setupIcon"></a></div><div class="flickrbombFlyout"><div class="content"><a href="#" title="Previous Page" class="prev">&#9664;</a><a href="#" title="Next Page" class="next">&#9654;</a></div></div>'),
 
-        updateSrc: function (model, src) {
-          var self = this;
-          this.$('img.flickrbomb')
-              .css({top: 'auto', left: 'auto', width: 'auto', height: 'auto'})
-              .attr('src', '')
-              .bind('load', self.setDimentions)
-              .attr('src', src);
-        },
+	        initialize: function (options) {
+	          _.bindAll(this, 'addImage', 'updateSrc', 'setDimentions', 'updateDimentions');
+	          var keywords = options.img.attr('src').replace('flickr://', '');
 
-        setDimentions: function (event) {
-          this.image.set({
-            width: this.$('img').width(),
-            height: this.$('img').height()
-          });
-          this.updateDimentions(this.image);
-          $(event.target).unbind('load');
-        },
+	          this.$el = $(this.el);
+	          this.ratio = this.options.img.attr('data-ratio');
 
-        updateDimentions: function () {
-          var image = this.$('img.flickrbomb'),
-              flickrWidth = this.image.get('width'),
-              flickrHeight = this.image.get('height'),
-              flickrAspectRatio = flickrWidth / flickrHeight,
-              clientWidth = this.$('div.flickrbombWrapper').width(),
-              clientHeight = this.$('div.flickrbombWrapper').height(),
-              clientAspectRatio = clientWidth / clientHeight;
+	          this.image = new Image({keywords: keywords, id: options.img.attr('id')});
+	          this.image.flickrImages.bind('add', this.addImage);
+	          this.image.bind('change:src', this.updateSrc);
+	        },
 
-          if (flickrAspectRatio < clientAspectRatio) {
-            image.css({
-                width: '100%',
-                height: null
-              });
-            image.css({
-                top: ((clientHeight - image.height()) / 2) + 'px',
-                left: null
-              });
-          } else {
-            image.css({
-                height: '100%',
-                width: null
-            });
-            image.css({
-                left: ((clientWidth - image.width()) / 2) + 'px',
-                top: null
-              });
-          }
-        },
+	        events: {
+	          "click .setupIcon": "clickSetup",
+	          "click .flickrbombFlyout a.photo": "selectImage",
+	          "click .flickrbombFlyout a.next": "nextFlickrPhotos",
+			  "click .flickrbombFlyout a.prev": "prevFlickrPhotos"
+	        },
 
-        addImage: function (image) {
-          this.flickrImageView = new FlickrImageView({model: image, image: this.image});
-          this.$('.flickrbombFlyout').append(this.flickrImageView.render().el);
-        },
+	        render: function() {
+	          $(this.el).html(this.template());
+	          this.image.fetch();
 
-        clickSetup: function (event) {
-          event.preventDefault();
+	          if (!this.ratio) {
+	            this.resize();
+	          } else {
+				this.$('.flickrbombWrapper').append('<img style="width: 100%;" class="placeholder" src="http://placehold.it/' + this.ratio + '" />');
+			  }
+	          return this;
+	        },
 
-          this.toggleFlyout();
-        },
+	        updateSrc: function (model, src) {
+	          var self = this;
+	          this.$('img.flickrbomb')
+	              .css({top: 'auto', left: 'auto', width: 'auto', height: 'auto'})
+	              .attr('src', '')
+	              .bind('load', self.setDimentions)
+	              .attr('src', src);
+	        },
 
-        toggleFlyout: function () {
-			this.$('.flickrbombFlyout').toggle();
-        },
-		
-        selectImage: function (event) {
-          event.preventDefault();
+	        setDimentions: function (event) {
+	          this.image.set({
+	            width: this.$('img').width(),
+	            height: this.$('img').height()
+	          });
+	          this.updateDimentions(this.image);
+	          $(event.target).unbind('load');
+	        },
 
-          this.toggleFlyout();
-        },
+	        updateDimentions: function () {
+	          var image = this.$('img.flickrbomb'),
+	              flickrWidth = this.image.get('width'),
+	              flickrHeight = this.image.get('height'),
+	              flickrAspectRatio = flickrWidth / flickrHeight,
+	              clientWidth = this.$('div.flickrbombWrapper').width(),
+	              clientHeight = this.$('div.flickrbombWrapper').height(),
+	              clientAspectRatio = clientWidth / clientHeight;
 
-        nextFlickrPhotos: function (event) {
-          event.preventDefault();
-          this.$('.flickrbombFlyout').find('a.photo').remove();
-          this.image.flickrImages.nextPage();
-        },
-		prevFlickrPhotos: function (event) {
-          event.preventDefault();
+	          if (flickrAspectRatio < clientAspectRatio) {
+	            image.css({
+	                width: '100%',
+	                height: null
+	              });
+	            image.css({
+	                top: ((clientHeight - image.height()) / 2) + 'px',
+	                left: null
+	              });
+	          } else {
+	            image.css({
+	                height: '100%',
+	                width: null
+	            });
+	            image.css({
+	                left: ((clientWidth - image.width()) / 2) + 'px',
+	                top: null
+	              });
+	          }
+	        },
 
-          this.$('.flickrbombFlyout').find('a.photo').remove();
-          this.image.flickrImages.prevPage();
-        },
+	        addImage: function (image) {
+	          this.flickrImageView = new FlickrImageView({model: image, image: this.image});
+	          this.$('.flickrbombFlyout').append(this.flickrImageView.render().el);
+	        },
 
-        resize: function () {
-          this.$('div.flickrbombWrapper').css({
-              width: this.width() + 'px',
-              height: this.height() + 'px'
-          });
-        },
+	        clickSetup: function (event) {
+	          event.preventDefault();
+	          this.toggleFlyout();
+	        },
 
-        width: function () {
-          return parseInt(this.options.img.width());
-        },
+	        toggleFlyout: function () {
+	          this.$('.flickrbombFlyout').toggle();
+	        },
 
-        height: function () {
-          return parseInt(this.options.img.height());
-        }
+	        selectImage: function (event) {
+	          event.preventDefault();
 
-      });
-  $("img[src^='flickr://']").each(function () {
-    var img = $(this);
-    var imageView = new ImageView({img: img});
-    img.replaceWith(imageView.render().el);
-  });
-  
-})(jQuery);
-}
+	          this.toggleFlyout();
+	        },
+
+	        nextFlickrPhotos: function (event) {
+	          event.preventDefault();
+
+	          this.$('.flickrbombFlyout').find('a.photo').remove();
+	          this.image.flickrImages.nextPage();
+	        },
+			prevFlickrPhotos: function (event) {
+	          event.preventDefault();
+
+	          this.$('.flickrbombFlyout').find('a.photo').remove();
+	          this.image.flickrImages.prevPage();
+	        },
+
+	        resize: function () {
+	          this.$('div.flickrbombWrapper').css({
+	              width: this.width() + 'px', 
+	              height: this.height() + 'px'
+	          });
+	        },
+
+	        width: function () {
+	          return parseInt(this.options.img.width());
+	        },
+
+	        height: function () {
+	          return parseInt(this.options.img.height());
+	        }
+
+	      });
+
+	  $("img[src^='flickr://']").each(function () {
+	    var img = $(this);
+	    var imageView = new ImageView({img: img});
+	    img.replaceWith(imageView.render().el);
+	  });
+
+	})(jQuery);
+};
 startFlickrBomb();
