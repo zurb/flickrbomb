@@ -244,10 +244,10 @@ startFlickrBomb = function () {
 	          this.toggleFlyout();
 	        },
 
-	        toggleFlyout: function () {
+	        toggleFlyout: function (event) {			
 	          this.$('.flickrbombFlyout').toggle();
 	        },
-
+			
 	        selectImage: function (event) {
 	          event.preventDefault();
 
@@ -293,11 +293,16 @@ startFlickrBomb = function () {
 	        }
 
 	      });
-
 	  $("img[src^='flickr://']").each(function () {
 	    var img = $(this);
 	    var imageView = new ImageView({img: img});
 	    img.replaceWith(imageView.render().el);
+	  });
+	
+	  $('body').click(function(event) {
+	    if (!$(event.target).closest('.setupIcon').length && !$(event.target).closest('.flickrbombFlyout').length) {
+	      $('.flickrbombFlyout').hide();
+	    };
 	  });
 
 	})(jQuery);

@@ -243,10 +243,10 @@ var flickrbombAPIkey = '66b5c17019403c96779e8fe88d5b576d',  //your Flickr API ke
 	          this.toggleFlyout();
 	        },
 
-	        toggleFlyout: function () {
+	        toggleFlyout: function (event) {			
 	          this.$('.flickrbombFlyout').toggle();
 	        },
-
+			
 	        selectImage: function (event) {
 	          event.preventDefault();
 
@@ -292,11 +292,16 @@ var flickrbombAPIkey = '66b5c17019403c96779e8fe88d5b576d',  //your Flickr API ke
 	        }
 
 	      });
-
 	  $("img[src^='flickr://']").each(function () {
 	    var img = $(this);
 	    var imageView = new ImageView({img: img});
 	    img.replaceWith(imageView.render().el);
+	  });
+	
+	  $('body').click(function(event) {
+	    if (!$(event.target).closest('.setupIcon').length && !$(event.target).closest('.flickrbombFlyout').length) {
+	      $('.flickrbombFlyout').hide();
+	    };
 	  });
 
 	})(jQuery);
