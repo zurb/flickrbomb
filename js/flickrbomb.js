@@ -11,7 +11,7 @@ var flickrBomb = function flickrBomb(key) {
     if (!(this instanceof flickrBomb)) return new flickrBomb();
     
     var flickrbombAPIkey = key || '66b5c17019403c96779e8fe88d5b576d',  // replace with your Flickr API key (fallback)
-
+    
         /*  flickrbombLicenseTypes values (comma delimited)
 
             empty means all license types
@@ -30,8 +30,8 @@ var flickrBomb = function flickrBomb(key) {
         flickrbombLicenseTypes = '',
         localStorage,
         localSync;
-    
-    if (!flickrbombAPIkey) return new Error('Flickr API key required for flickrBomb');
+        
+    if (!flickrbombAPIkey) return new Error('flickr API key required');
 
     function supports_local_storage() { try { return 'localStorage' in window && window.localStorage !== null; } catch(e){ return false; } }
 
@@ -408,8 +408,8 @@ var flickrBomb = function flickrBomb(key) {
         
         $("img[src^='flickr://']").each(function () {
             var img = $(this),
-                imageView = new ImageView({img: img});
-
+                imageView = new self.ImageView({img: img});
+                
             img.replaceWith(imageView.render().el);
         });
     };
