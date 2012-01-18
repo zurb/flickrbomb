@@ -1,5 +1,6 @@
-(function($){
-function demoLoad (){
+(function(){
+    flickrBomb.init();
+    
 	var currentValue = false,
 	el = $('#demo-content span');
 	el.focus(function(){
@@ -10,7 +11,7 @@ function demoLoad (){
 			e.preventDefault();
 			updateIMG($(this));
 		}
-	})
+	});
 	el.focusout(function() {
 		updateIMG($(this));
 	});
@@ -18,11 +19,11 @@ function demoLoad (){
 		if (argu.text() !== currentValue) {
 			var keywords = $('#keywords').text();
 			$('#demo-splash').html('<img src="flickr://' + keywords + '" width="940px" height="250px" style="display:none"><span>Loading New Demo Content</span>');
-			startFlickrBomb();
+			flickrBomb.bomb();
 		} else {
 			return false;
 		}
 	}
-}
-demoLoad();
-})(jQuery);
+	
+	flickrBomb.bomb();
+})();
