@@ -1,12 +1,25 @@
-= flickrBomb =
+# flickrBomb
 
 flickrBomb provides an easy way for you to fill your prototypes with relevant content, and not just those dull gray placeholder images.
 
-== Usage ==
+## This is a fork
 
-Include on your page or app, creates a global `flickrBomb`.
+This version is slightly tweaked in that it does not rely on jeromegn/Backbone.localStorage included, that functionality is baked into the class. The reason is because the plugin is destructive and replaces `Backbone.sync` with localStorage, which is probably not what you want if you are using flickrBomb on a Backbone project.
 
-* `flickrBomb.init()` Will initialize 
+I also made this a class instead of a single-fire or very inefficient function, in case you wanted to call `bomb()` manually after you dynamically add placeholders.
+
+## Usage
+
+Include `underscore.js` and `backbone.js`. Include `flickrbomb.js`, this creates a `flickrBomb` class.
+
+* Create a bomb `var fbomb = flickrBomb()`
+* Bombs away `fbomb.bomb()`
+* Repeat
+    * If you dynamically add more img tags with `flickr://puppy`, then call `fbomb.bomb()`, it will re-bomb those images only.
+
+To create placeholders to be replaced with flickr images, create image tags like this `<img src="flickr://Kevin Bacon" width="175px" height="175px">`. "Kevin Bacon" will be the keyword used for the flickr search.
+
+See http://www.zurb.com/playground/rapid-prototyping-with-flickrbomb for more info on options for placeholders.
 
 ```
 www.ZURB.com/playground
