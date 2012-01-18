@@ -1,5 +1,5 @@
 (function(){
-    flickrBomb.init();
+    var fbomb = flickrBomb();
     
 	var currentValue = false,
 	el = $('#demo-content span');
@@ -19,11 +19,11 @@
 		if (argu.text() !== currentValue) {
 			var keywords = $('#keywords').text();
 			$('#demo-splash').html('<img src="flickr://' + keywords + '" width="940px" height="250px" style="display:none"><span>Loading New Demo Content</span>');
-			flickrBomb.bomb();
+			fbomb.bomb();
 		} else {
 			return false;
 		}
 	}
 	
-	flickrBomb.bomb();
+	fbomb.bomb();
 })();
