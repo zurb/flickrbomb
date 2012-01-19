@@ -6,9 +6,9 @@
  * http://www.opensource.org/licenses/mit-license.php
 */
 
-// Optionally pass a Flickr API key on instantiation
+// @param [key] Optionally pass a Flickr API key on instantiation, or just hardcode it below.
 var flickrBomb = function flickrBomb(key) {
-    if (!(this instanceof flickrBomb)) return new flickrBomb();
+    if (!(this instanceof flickrBomb)) return new flickrBomb(arguments[0]);
     
     var flickrbombAPIkey = key || '66b5c17019403c96779e8fe88d5b576d',  // replace with your Flickr API key (fallback)
     
@@ -32,7 +32,7 @@ var flickrBomb = function flickrBomb(key) {
         localSync;
         
     if (!flickrbombAPIkey) return new Error('flickr API key required');
-
+    
     function supports_local_storage() { try { return 'localStorage' in window && window.localStorage !== null; } catch(e){ return false; } }
 
     if (supports_local_storage()) {
@@ -394,23 +394,26 @@ var flickrBomb = function flickrBomb(key) {
             }
 
         });
-
-    $('body').click(function(event) {
-        if (!$(event.target).closest('.setupIcon').length && !$(event.target).closest('.flickrbombFlyout').length) {
-            $('.flickrbombFlyout').hide();
-        }
-    });
-
-    this.ImageView = ImageView;
     
+    // Replace any placeholders with flickr images
     this.bomb = function() {
         var self = this;
         
         $("img[src^='flickr://']").each(function () {
             var img = $(this),
-                imageView = new self.ImageView({img: img});
+                imageView = new ImageView({img: img});
                 
             img.replaceWith(imageView.render().el);
         });
     };
+
+    // Listener to close any open flickrbomb menus if you click on body
+    $('body').click(function(event) {
+        if (!$(event.target).closest('.setupIcon').length && !$(event.target).closest('.flickrbombFlyout').length) {
+            $('.flickrbombFlyout').hide();
+        }
+    });    
 };
+    
+// Bomb on sight! Just on include.
+if ($("img[src^='flickr://']").length) flickrBomb().bomb();
